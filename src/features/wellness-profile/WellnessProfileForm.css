@@ -1,0 +1,216 @@
+/* ============================================================
+   WellnessProfileForm — Dark Slate Design
+   Spec: card #1E293B, border #334155, radius 16px
+        success #10B981, indigo button #6366F1
+   ============================================================ */
+
+.form-card {
+  background:    var(--color-card);
+  border:        1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding:       var(--space-8) var(--space-10);
+  width:         100%;
+  max-width:     860px;
+  margin:        0 auto;
+  box-shadow:
+    0 4px 6px -1px rgba(0,0,0,0.4),
+    0 2px 4px -2px rgba(0,0,0,0.3);
+}
+
+/* Two-column responsive grid */
+.form-grid {
+  display:               grid;
+  grid-template-columns: 1fr 1fr;
+  gap:                   var(--space-6);
+}
+
+@media (max-width: 640px) {
+  .form-card {
+    padding: var(--space-6) var(--space-5);
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Field group */
+.field-group {
+  display:        flex;
+  flex-direction: column;
+  gap:            var(--space-2);
+}
+
+.field-label {
+  font-size:   var(--font-size-sm);
+  font-weight: 500;
+  color:       var(--color-text-muted);
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+}
+
+/* Input wrapper holds input + checkmark icon */
+.input-wrapper {
+  position: relative;
+  display:  flex;
+  align-items: center;
+}
+
+.field-input {
+  width:            100%;
+  background:       #0F172A;
+  border:           1.5px solid var(--color-border);
+  border-radius:    var(--radius-sm);
+  color:            var(--color-text-primary);
+  font-family:      var(--font-family);
+  font-size:        var(--font-size-base);
+  padding:          var(--space-3) var(--space-4);
+  padding-right:    2.5rem; /* room for checkmark */
+  outline:          none;
+  transition:       border-color var(--transition-fast),
+                    box-shadow   var(--transition-fast);
+}
+
+.field-input::placeholder {
+  color: var(--color-placeholder);
+}
+
+.field-input:focus {
+  border-color: var(--color-border-focus);
+  box-shadow:   0 0 0 3px rgba(99,102,241,0.25);
+}
+
+.field-input.is-valid {
+  border-color: var(--color-success);
+}
+
+.field-input.is-error {
+  border-color: var(--color-error);
+}
+
+/* Inline checkmark */
+.field-check {
+  position:    absolute;
+  right:       var(--space-3);
+  color:       var(--color-success);
+  font-size:   1.1rem;
+  font-weight: 700;
+  line-height: 1;
+  opacity:     0;
+  transform:   scale(0.5);
+  transition:  opacity var(--transition-fast),
+               transform var(--transition-fast);
+  pointer-events: none;
+  user-select: none;
+}
+
+.field-check.visible {
+  opacity:   1;
+  transform: scale(1);
+}
+
+/* Inline error message */
+.field-error {
+  font-size: var(--font-size-xs);
+  color:     var(--color-error);
+  min-height: 1rem;
+  transition: opacity var(--transition-fast);
+}
+
+/* Submit button spanning full width below grid */
+.form-actions {
+  margin-top:  var(--space-8);
+  display:     flex;
+  align-items: center;
+  gap:         var(--space-4);
+  flex-wrap:   wrap;
+}
+
+.btn-save {
+  flex:             1;
+  background:       var(--color-indigo);
+  color:            #fff;
+  border:           none;
+  border-radius:    var(--radius-md);
+  font-family:      var(--font-family);
+  font-size:        var(--font-size-base);
+  font-weight:      600;
+  letter-spacing:   0.025em;
+  padding:          var(--space-4) var(--space-8);
+  cursor:           pointer;
+  transition:       background var(--transition-fast),
+                    transform  var(--transition-fast),
+                    box-shadow var(--transition-fast);
+  min-width:        200px;
+}
+
+.btn-save:hover:not(:disabled) {
+  background:  var(--color-indigo-hover);
+  transform:   translateY(-1px);
+  box-shadow:  0 8px 25px rgba(99,102,241,0.4);
+}
+
+.btn-save:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-save:disabled {
+  background: var(--color-indigo-disabled);
+  color:      rgba(255,255,255,0.4);
+  cursor:     not-allowed;
+  transform:  none;
+  box-shadow: none;
+}
+
+.btn-save.loading {
+  position: relative;
+  color: transparent;
+}
+
+.btn-save.loading::after {
+  content:  '';
+  position: absolute;
+  inset:    0;
+  margin:   auto;
+  width:    20px;
+  height:   20px;
+  border:       2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius:    50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Toast notification */
+.toast {
+  position:      fixed;
+  bottom:        var(--space-8);
+  right:         var(--space-8);
+  background:    #064E3B;
+  border:        1px solid var(--color-success);
+  border-radius: var(--radius-md);
+  color:         #D1FAE5;
+  font-size:     var(--font-size-sm);
+  font-weight:   500;
+  padding:       var(--space-4) var(--space-6);
+  display:       flex;
+  align-items:   center;
+  gap:           var(--space-3);
+  box-shadow:    0 10px 30px rgba(0,0,0,0.4);
+  z-index:       9999;
+  transform:     translateY(120%);
+  opacity:       0;
+  transition:    transform var(--transition-base),
+                 opacity   var(--transition-base);
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity:   1;
+}
+
+.toast-icon {
+  font-size: 1.2rem;
+}
