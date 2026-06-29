@@ -8,14 +8,16 @@ on:
 env:
   PROJECT_ID: 'trial-ge' # TODO: Replace with your Google Cloud Project ID
   GAR_LOCATION: 'asia-southeast2'       # TODO: Replace with your Artifact Registry region
-  REPOSITORY: 'metro-fit-frontend'   # TODO: Replace with your Artifact Registry repository name
-  SERVICE: 'metro-fit-frontend'      # TODO: Replace with your Cloud Run service name
+  REPOSITORY: 'metro-fit-frontend-${{ github.ref_name }}'   # TODO: Replace with your Artifact Registry repository name
+  SERVICE: 'metro-fit-frontend-${{ github.ref_name }}'
   REGION: 'asia-southeast2'         # Cloud Run Region
 
 jobs:
   deploy:
     name: Build and Deploy to Cloud Run
     runs-on: ubuntu-latest
+    environment: ${{ github.ref_name == 'main' && 'production' || 'development' }}
+    
     permissions:
       contents: 'read'
       id-token: 'write'
