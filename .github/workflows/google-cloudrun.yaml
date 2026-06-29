@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - development
+      - main
 
 env:
   PROJECT_ID: 'trial-ge' # TODO: Replace with your Google Cloud Project ID
