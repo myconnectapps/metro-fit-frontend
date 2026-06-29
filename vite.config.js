@@ -12,7 +12,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:3001',
+        target: 'https://metro-fit-backend-481201841367.asia-southeast2.run.app',
         changeOrigin: true,
       },
     },
